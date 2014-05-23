@@ -1,0 +1,34 @@
+import bitalino
+device = bitalino.BITalino()
+
+macAddress = "98:D3:31:B2:14:72"
+SamplingRate = 1000
+device.open(macAddress, SamplingRate) # Set MAC address and sampling rate
+
+th = device.battery(20) # Set battery threshold
+
+BITversion = device.version() # Get BITalino firmware version
+print BITversion
+
+device.start([0,1,2,3,4,5]) # Start Acquisition in Analog Channels 0 and 3
+
+dataAcquired = device.read(10) # Read 1000 samples
+
+device.trigger([0,0,0,0]) # Turn on BITalino LED
+device.stop() # Stop acquisition
+device.close()
+
+SeqN = dataAcquired[0,:]
+D0 = dataAcquired[1,:]
+D1 = dataAcquired[2,:]
+D2 = dataAcquired[3,:]
+D3 = dataAcquired[4,:]
+A0 = dataAcquired[5,:]
+A1 = dataAcquired[6,:]
+A2 = dataAcquired[7,:]
+A3 = dataAcquired[8,:]
+A4 = dataAcquired[9,:]
+A5 = dataAcquired[10,:]
+
+
+print A0
