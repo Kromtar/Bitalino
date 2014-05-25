@@ -12,7 +12,7 @@ print BITversion
 
 device.start([0,1,2,3,4,5]) # Start Acquisition in Analog Channels 0 and 3
 
-dataAcquired = device.read(10) # Read 1000 samples
+dataAcquired = device.read(10) # Read 10 samples
 
 device.trigger([0,0,0,0]) # Turn on BITalino LED
 device.stop() # Stop acquisition
