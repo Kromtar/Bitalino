@@ -10,11 +10,11 @@ th = device.battery(20) # Set battery threshold
 BITversion = device.version() # Get BITalino firmware version
 print BITversion
 
-device.start([0,1,2,3,4,5]) # Start Acquisition in Analog Channels 0 and 3
+device.start([0,1,2,3,4,5]) 
 
 dataAcquired = device.read(10) # Read 10 samples
 
-device.trigger([0,0,0,0]) # Turn on BITalino LED
+device.trigger([0,0,0,0]) 
 device.stop() # Stop acquisition
 device.close()
 
