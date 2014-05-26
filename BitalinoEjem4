@@ -1,3 +1,5 @@
+#By Kromtar#
+
 import bitalino
 import time
 device = bitalino.BITalino()
