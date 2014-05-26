@@ -1,0 +1,49 @@
+import bitalino
+import time
+device = bitalino.BITalino()
+
+
+samples = 100                       #Numero de samples
+read = 10                           #Read
+#By Kromtar#
+
+macAddress = "98:D3:31:B2:14:72"    #MAC Bitalino
+ciclos = 200                        #Numero de ciclos 
+
+a = 0
+estado = 0
+SamplingRate = samples
+device.open(macAddress, SamplingRate) 
+th = device.battery(20)
+BITversion = device.version() 
+print BITversion
+
+device.start([0,1,2,3,4,5])
+device.trigger([0,0,0,0])
+
+while a < ciclos:
+    dataAcquired = device.read(read)
+    SeqN = dataAcquired[0,:]   
+    D0 = dataAcquired[1,:]
+    D1 = dataAcquired[2,:]
+    D2 = dataAcquired[3,:]
+    D3 = dataAcquired[4,:]
+    A0 = dataAcquired[5,:]
+    A1 = dataAcquired[6,:]
+    A2 = dataAcquired[7,:]
+    A3 = dataAcquired[8,:]
+    A4 = dataAcquired[9,:]
+    A5 = dataAcquired[10,:]
+    for i in range(read):
+        datos = A0[i]
+        if datos < 50 and estado == 0:
+            device.trigger([1,0,0,0])
+            print "Luz Encendida"
+            estado = 1
+        elif datos >= 50 and estado == 1:
+            device.trigger([0,0,0,0])
+            print "Luz Apagada"
+            estado = 0
+    a = a + 1
+device.stop()
+device.close()
